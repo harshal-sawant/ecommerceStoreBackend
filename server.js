@@ -15,16 +15,19 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended: false}))
 app.use(cookieParser())
 
-app.use('/auth', require('./routes/authRoute'))
-app.use('/users', require('./routes/userRoute'))
-app.use('/products', require('./routes/productRoute'))
-app.use('/carts', require('./routes/cartRoute'))
-app.use('/orders', require('./routes/orderRoute'))
+// Define routes with the Netlify function base path
+app.use('/.netlify/functions/api/auth', require('./routes/authRoute'));
+app.use('/.netlify/functions/api/users', require('./routes/userRoute'));
+app.use('/.netlify/functions/api/products', require('./routes/productRoute'));
+app.use('/.netlify/functions/api/carts', require('./routes/cartRoute'));
+app.use('/.netlify/functions/api/orders', require('./routes/orderRoute'));
 
-app.use(notFound)
-app.use(errorHandler)
+// Error handling middleware
+app.use(notFound);
+app.use(errorHandler);
 
-app.listen(port, ()=>{
-    connectDb()
+// Start the server
+app.listen(port, () => {
+    connectDb();
     console.log(`Listening to ${port}`);
-})
+});
