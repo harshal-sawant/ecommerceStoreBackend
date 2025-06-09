@@ -15,10 +15,9 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended: false}))
 app.use(cookieParser())
 
-
 app.use('/auth', require('./routes/authRoute'))
 app.use('/users', require('./routes/userRoute'))
-app.use('/products', require('./routes/productRoute'))
+app.use('/.netlify/functions/api/products', require('./routes/productRoute'))
 app.use('/carts', require('./routes/cartRoute'))
 app.use('/orders', require('./routes/orderRoute'))
 
