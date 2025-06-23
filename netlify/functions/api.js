@@ -3,9 +3,13 @@ const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const { notFound, errorHandler } = require('../../middlewares/errorHandler');
 const connectDb = require('../../config/dbConnection');
+const cors = require('cors'); // ✅ Add this line
 
 // Create an Express app
 const app = express();
+
+// Enable CORS
+app.use(cors()); // Add the cors middleware to allow cross-origin requests
 
 // Middleware
 app.use(bodyParser.json());

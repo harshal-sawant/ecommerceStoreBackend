@@ -2,7 +2,6 @@ const asyncHandler = require('express-async-handler')
 const Products = require('../models/productModel') 
 const Users = require('../models/userModel') 
 const slugify = require('slugify')
-const { json } = require('express')
 
 // @desc Get products with optional filters
 // @route GET /api/products
@@ -35,6 +34,8 @@ getProducts = asyncHandler(async(req,res)=>{
 // @route GET /api/products/:id
 // @access Public
 getProduct = asyncHandler(async(req,res)=>{
+   
+
     const productAvailable = await Products.findById(req.params.id)
     if (!productAvailable){
         res.status(400)
