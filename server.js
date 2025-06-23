@@ -16,9 +16,17 @@ app.use(bodyParser.urlencoded({extended: false}))
 app.use(cookieParser())
 
 // Define routes with the Netlify function base path
-app.use('/.netlify/functions/api/auth', require('./routes/authRoute'));
+app.use('/.netlify/functions/api/auth', (req, res, next) => {
+    console.log('Auth route hit');
+    next();
+}, require('./routes/authRoute'));
+
+app.use('/.netlify/functions/api/products', (req, res, next) => {
+    console.log('Products route hit');
+    next();
+}, require('./routes/productRoute'));
+
 app.use('/.netlify/functions/api/users', require('./routes/userRoute'));
-app.use('/.netlify/functions/api/products', require('./routes/productRoute'));
 app.use('/.netlify/functions/api/carts', require('./routes/cartRoute'));
 app.use('/.netlify/functions/api/orders', require('./routes/orderRoute'));
 
